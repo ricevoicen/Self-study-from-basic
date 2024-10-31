@@ -52,3 +52,6 @@ def fib(n):
 result = fib(8)
 #书中的错误代码 1.5.5
 #就是本代码第一行的那个
+
+
+assert fibonacci_number_hashu(1) == 1
