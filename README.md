@@ -9,7 +9,7 @@ This repository is dedicated to documenting my journey of self-learning computer
 ## Let's start reading books
 To: My confused past, the data I've seen is very messy, without a system, hoping to persist through the behavior of "filling in the GitHub green squares"
 
-Reading books in the order of [text](https://teachyourselfcs.com/), starting from
+Reading books in the order of [teach_yourself_cs](https://teachyourselfcs.com/), starting from
 《Structure and Interpretation of Computer Programs》
 
 ## 2024-10-30
