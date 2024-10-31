@@ -19,6 +19,6 @@ Reading books in the order of [teach_yourself_cs](https://teachyourselfcs.com/),
 ## 開始看書吧
 至：我迷茫的曾經，看過的資料都很雜亂，沒有系統性，希望可以藉著“填滿github綠色格子這種行爲堅持下去”
 
-看書按照[text](https://teachyourselfcs.com/)的順序來，先從
+看書按照[teach_yourself_cs](https://teachyourselfcs.com/)的順序來，先從
 《Structure and Interpretation of Computer Programs》開始
 
