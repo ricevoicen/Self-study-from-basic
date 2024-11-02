@@ -20,6 +20,9 @@ print(f"原始数组: {mindo}")
 n_length = len(mindo)
 
 if n_length < 50:
+    print("\n" + "="*50)
+    print("\n使用插入排序算法 (INSERTION SORT)".center(50))
+    print("="*50 + "\n")
     # 插入排序，显示每一步
     def insertion_sort(arr):
         for i in range(1, len(arr)):
@@ -34,10 +37,12 @@ if n_length < 50:
             print(f"本轮排序后: {arr}")
         return arr
     
-    print("\n使用插入排序算法:")
     sorted_array = insertion_sort(mindo)
 
 elif n_length < 1000:
+    print("\n" + "="*50)
+    print("\n使用快速排序算法 (QUICK SORT)".center(50))
+    print("="*50 + "\n")
     # 快速排序，显示每一步
     def quick_sort(arr, start=0, end=None):
         if end is None:
@@ -60,10 +65,12 @@ elif n_length < 1000:
             quick_sort(arr, i + 2, end)
         return arr
     
-    print("\n使用快速排序算法:")
     sorted_array = quick_sort(mindo.copy())
 
 else:
+    print("\n" + "="*50)
+    print("\n使用归并排序算法 (MERGE SORT)".center(50))
+    print("="*50 + "\n")
     # 归并排序，显示每一步
     def merge_sort(arr):
         if len(arr) <= 1:
@@ -96,7 +103,6 @@ else:
         print(f"合并后: {result}")
         return result
     
-    print("\n使用归并排序算法:")
     sorted_array = merge_sort(mindo.copy())
 
 print(f"\n最终排序结果: {sorted_array}")
