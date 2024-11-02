@@ -1,3 +1,1 @@
-## today idk should learn anything
-
-
+## today idk what to learn
