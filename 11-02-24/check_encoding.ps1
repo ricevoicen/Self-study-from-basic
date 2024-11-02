@@ -15,16 +15,16 @@ if (-not (Test-Path $filePath)) {
     exit
 }
 
-# Read the file content as bytes
+# Read the file content as bytes using .NET method
 try {
-    $bytes = Get-Content -Path $filePath -Encoding Byte -ReadCount 1024 -ErrorAction Stop
+    $bytes = [System.IO.File]::ReadAllBytes($filePath)
 
     # Check for BOM (Byte Order Mark)
-    if ($bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF) {
+    if ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF) {
         Write-Host "Encoding: UTF-8 with BOM"
-    } elseif ($bytes[0] -eq 0xFF -and $bytes[1] -eq 0xFE) {
+    } elseif ($bytes.Length -ge 2 -and $bytes[0] -eq 0xFF -and $bytes[1] -eq 0xFE) {
         Write-Host "Encoding: UTF-16 LE"
-    } elseif ($bytes[0] -eq 0xFE -and $bytes[1] -eq 0xFF) {
+    } elseif ($bytes.Length -ge 2 -and $bytes[0] -eq 0xFE -and $bytes[1] -eq 0xFF) {
         Write-Host "Encoding: UTF-16 BE"
     } else {
         # Try to detect UTF-8 without BOM
@@ -52,15 +52,33 @@ try {
         }
     }
 
-    # Additional check using .NET
-    $content = [System.IO.File]::ReadAllBytes($filePath)
-    $encoding = [System.Text.Encoding]::Default
+    # Try different encodings
+    Write-Host "`nTrying different encodings:"
+    
+    # UTF-8
     try {
-        $decoded = $encoding.GetString($content)
-        Write-Host "`nSystem default encoding detection: $($encoding.WebName)"
+        $utf8 = [System.Text.Encoding]::UTF8.GetString($bytes)
+        Write-Host "UTF-8 decode successful"
     } catch {
-        Write-Host "`nFailed to decode with system default encoding"
+        Write-Host "UTF-8 decode failed"
     }
+    
+    # ASCII
+    try {
+        $ascii = [System.Text.Encoding]::ASCII.GetString($bytes)
+        Write-Host "ASCII decode successful"
+    } catch {
+        Write-Host "ASCII decode failed"
+    }
+    
+    # Default system encoding
+    try {
+        $default = [System.Text.Encoding]::Default.GetString($bytes)
+        Write-Host "System default encoding ($([System.Text.Encoding]::Default.WebName)) decode successful"
+    } catch {
+        Write-Host "System default encoding decode failed"
+    }
+
 } catch {
     Write-Host "Error reading file: $_"
 } 
